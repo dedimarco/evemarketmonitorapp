@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartArguments>/p 0 /h "C:\Documents and Settings\Administrator\My Documents\Visual Studio 2005\Projects\EMMA1\bin\Release"</StartArguments>
+  </PropertyGroup>
+</Project>

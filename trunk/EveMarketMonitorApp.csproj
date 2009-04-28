@@ -1,0 +1,911 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0843EAA-49A9-4746-B0A7-8958A7704ADF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EveMarketMonitorApp</RootNamespace>
+    <AssemblyName>EveMarketMonitorApp</AssemblyName>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ApplicationIcon>icon_coins_45.ICO</ApplicationIcon>
+    <StartupObject>EveMarketMonitorApp.Program</StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>EMMA.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <PublishUrl>http://localhost/EveMarketMonitorApp/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoUpdater, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>Libs\AutoUpdater.exe</HintPath>
+    </Reference>
+    <Reference Include="Enforcer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Enforcer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractionClasses\APICharacter.cs" />
+    <Compile Include="AbstractionClasses\APISettingsAndStatus.cs" />
+    <Compile Include="AbstractionClasses\EveCentral.cs" />
+    <Compile Include="AbstractionClasses\EveMetrics.cs" />
+    <Compile Include="AbstractionClasses\EvePrices.cs" />
+    <Compile Include="AbstractionClasses\Reg.cs" />
+    <Compile Include="AbstractionClasses\TutorialData.cs" />
+    <Compile Include="Common\Cache.cs" />
+    <Compile Include="AbstractionClasses\EVEAccount.cs" />
+    <Compile Include="Common\Compression.cs" />
+    <Compile Include="Common\CSVExport.cs" />
+    <Compile Include="Common\Diagnostics.cs" />
+    <Compile Include="Common\DynamicMethodCompiler.cs" />
+    <Compile Include="Common\FrequencyTable.cs" />
+    <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\HList.cs" />
+    <Compile Include="Common\IProvideStatus.cs" />
+    <Compile Include="Common\MultisortDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\ProgressDialog.designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\SortableCollection.cs" />
+    <Compile Include="Common\SortableObject.cs" />
+    <Compile Include="DatabaseClasses\AccessParams.cs" />
+    <Compile Include="DatabaseClasses\APICharacters.cs" />
+    <Compile Include="DatabaseClasses\APICharSettings.cs" />
+    <Compile Include="DatabaseClasses\Asset.cs" />
+    <Compile Include="DatabaseClasses\AssetList.cs" />
+    <Compile Include="DatabaseClasses\Assets.cs" />
+    <Compile Include="DatabaseClasses\AssetStatus.cs" />
+    <Compile Include="DatabaseClasses\AutoContractor.cs" />
+    <Compile Include="DatabaseClasses\BankAccounts.cs" />
+    <Compile Include="DatabaseClasses\BankTransaction.cs" />
+    <Compile Include="DatabaseClasses\BankTransactionsList.cs" />
+    <Compile Include="DatabaseClasses\EMMADataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMMADataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseClasses\Enums.cs" />
+    <Compile Include="DatabaseClasses\Constellations.cs" />
+    <Compile Include="DatabaseClasses\Contract.cs" />
+    <Compile Include="DatabaseClasses\ContractList.cs" />
+    <Compile Include="DatabaseClasses\Contracts.cs" />
+    <Compile Include="DatabaseClasses\ContractStatus.cs" />
+    <Compile Include="DatabaseClasses\GroupLocationsList.cs" />
+    <Compile Include="DatabaseClasses\Dividend.cs" />
+    <Compile Include="DatabaseClasses\DividendList.cs" />
+    <Compile Include="DatabaseClasses\Dividends.cs" />
+    <Compile Include="DatabaseClasses\EveAccounts.cs" />
+    <Compile Include="DatabaseClasses\GroupLocation.cs" />
+    <Compile Include="DatabaseClasses\GroupLocations.cs" />
+    <Compile Include="DatabaseClasses\Items.cs" />
+    <Compile Include="DatabaseClasses\ItemsTraded.cs" />
+    <Compile Include="DatabaseClasses\Journal.cs" />
+    <Compile Include="DatabaseClasses\JournalEntry.cs" />
+    <Compile Include="DatabaseClasses\JournalGenerations.cs" />
+    <Compile Include="DatabaseClasses\JournalList.cs" />
+    <Compile Include="DatabaseClasses\JournalRefTypes.cs" />
+    <Compile Include="DatabaseClasses\Map.cs" />
+    <Compile Include="DatabaseClasses\MarketGroups.cs" />
+    <Compile Include="DatabaseClasses\Names.cs" />
+    <Compile Include="DatabaseClasses\NAVHistory.cs" />
+    <Compile Include="DatabaseClasses\NPCCorps.cs" />
+    <Compile Include="DatabaseClasses\Order.cs" />
+    <Compile Include="DatabaseClasses\OrderRange.cs" />
+    <Compile Include="DatabaseClasses\Orders.cs" />
+    <Compile Include="DatabaseClasses\OrdersList.cs" />
+    <Compile Include="DatabaseClasses\Portaits.cs" />
+    <Compile Include="DatabaseClasses\PublicCorp.cs" />
+    <Compile Include="DatabaseClasses\PublicCorps.cs" />
+    <Compile Include="DatabaseClasses\PublicCorpsList.cs" />
+    <Compile Include="DatabaseClasses\Regions.cs" />
+    <Compile Include="DatabaseClasses\ReportGroup.cs" />
+    <Compile Include="DatabaseClasses\ReportGroups.cs" />
+    <Compile Include="DatabaseClasses\ReportGroupSettings.cs" />
+    <Compile Include="DatabaseClasses\ReprocessItem.cs" />
+    <Compile Include="DatabaseClasses\ReprocessItemList.cs" />
+    <Compile Include="DatabaseClasses\ReprocessJob.cs" />
+    <Compile Include="DatabaseClasses\ReprocessJobList.cs" />
+    <Compile Include="DatabaseClasses\ReprocessJobs.cs" />
+    <Compile Include="DatabaseClasses\ReprocessResult.cs" />
+    <Compile Include="DatabaseClasses\ReprocessResultList.cs" />
+    <Compile Include="DatabaseClasses\ShareValueHistory.cs" />
+    <Compile Include="DatabaseClasses\SolarSystemDistances.cs" />
+    <Compile Include="DatabaseClasses\ShareTransaction.cs" />
+    <Compile Include="DatabaseClasses\ShareTransactionList.cs" />
+    <Compile Include="DatabaseClasses\ShareTransactions.cs" />
+    <Compile Include="DatabaseClasses\SolarSystems.cs" />
+    <Compile Include="DatabaseClasses\Standings.cs" />
+    <Compile Include="DatabaseClasses\Stations.cs" />
+    <Compile Include="DatabaseClasses\Transaction.cs" />
+    <Compile Include="DatabaseClasses\TransactionList.cs" />
+    <Compile Include="DatabaseClasses\Transactions.cs" />
+    <Compile Include="DatabaseClasses\Updater.cs" />
+    <Compile Include="DatabaseClasses\UpdateResult.cs" />
+    <Compile Include="DatabaseClasses\UserAccount.cs" />
+    <Compile Include="DatabaseClasses\UserSettings.cs" />
+    <Compile Include="DatabaseClasses\EveDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EveDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseClasses\VerifyDatabase.cs" />
+    <Compile Include="DatabaseClasses\WebLink.cs" />
+    <Compile Include="DatabaseClasses\WebLinkList.cs" />
+    <Compile Include="DatabaseClasses\WebLinks.cs" />
+    <Compile Include="GUIElements\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\APIUpdateSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\APIUpdateSettings.Designer.cs">
+      <DependentUpon>APIUpdateSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\AutoAddConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\AutoAddConfig.designer.cs">
+      <DependentUpon>AutoAddConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\AutoUpdateSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\AutoUpdateSettings.Designer.cs">
+      <DependentUpon>AutoUpdateSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ExportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ExportData.Designer.cs">
+      <DependentUpon>ExportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\GridCalculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\GridCalculator.Designer.cs">
+      <DependentUpon>GridCalculator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\GroupLocationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\GroupLocationList.Designer.cs">
+      <DependentUpon>GroupLocationList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ItemValueDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ItemValueDetail.Designer.cs">
+      <DependentUpon>ItemValueDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ItemValueHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ItemValueHistory.Designer.cs">
+      <DependentUpon>ItemValueHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintBankAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintBankAccount.Designer.cs">
+      <DependentUpon>MaintBankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintBankTrans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintBankTrans.Designer.cs">
+      <DependentUpon>MaintBankTrans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\OrderNotificationSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\OrderNotificationSettings.Designer.cs">
+      <DependentUpon>OrderNotificationSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ReprocessHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ReprocessHistory.Designer.cs">
+      <DependentUpon>ReprocessHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\Reprocessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\Reprocessor.Designer.cs">
+      <DependentUpon>Reprocessor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ReprocessSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ReprocessSettings.Designer.cs">
+      <DependentUpon>ReprocessSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RouteCalcSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RouteCalcSettings.Designer.cs">
+      <DependentUpon>RouteCalcSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RoutePlanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RoutePlanner.Designer.cs">
+      <DependentUpon>RoutePlanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\Tutorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\Tutorial.Designer.cs">
+      <DependentUpon>Tutorial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\TutorialIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\TutorialIndex.Designer.cs">
+      <DependentUpon>TutorialIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewItemDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewItemDetail.Designer.cs">
+      <DependentUpon>ViewItemDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewUnacknowledgedOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewUnacknowledgedOrders.Designer.cs">
+      <DependentUpon>ViewUnacknowledgedOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintShareValueHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintShareValueHistory.designer.cs">
+      <DependentUpon>MaintShareValueHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ListShareValueHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ListShareValueHistory.designer.cs">
+      <DependentUpon>ListShareValueHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsNAVReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsNAVReport.designer.cs">
+      <DependentUpon>RptParamsNAVReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\CourierSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\CourierSettings.designer.cs">
+      <DependentUpon>CourierSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ListCorpWebLinks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ListCorpWebLinks.designer.cs">
+      <DependentUpon>ListCorpWebLinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ListDividend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ListDividend.designer.cs">
+      <DependentUpon>ListDividend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ListShareTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ListShareTransactions.designer.cs">
+      <DependentUpon>ListShareTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintDividend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintDividend.designer.cs">
+      <DependentUpon>MaintDividend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintPublicCorp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintPublicCorp.designer.cs">
+      <DependentUpon>MaintPublicCorp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintShareTrans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintShareTrans.designer.cs">
+      <DependentUpon>MaintShareTrans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\MaintWebLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\MaintWebLink.designer.cs">
+      <DependentUpon>MaintWebLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewInvestments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewInvestments.designer.cs">
+      <DependentUpon>ViewInvestments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewContracts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewContracts.Designer.cs">
+      <DependentUpon>ViewContracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ControlPanel.Designer.cs">
+      <DependentUpon>ControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\CourierCalc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\CourierCalc.designer.cs">
+      <DependentUpon>CourierCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\CreateReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\CreateReport.designer.cs">
+      <DependentUpon>CreateReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\GroupLocationMaint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\GroupLocationMaint.Designer.cs">
+      <DependentUpon>GroupLocationMaint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ImportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ImportData.Designer.cs">
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ManageReportGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ManageReportGroups.Designer.cs">
+      <DependentUpon>ManageReportGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\NewRptGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\NewRptGroup.Designer.cs">
+      <DependentUpon>NewRptGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ReportGroupSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ReportGroupSetup.Designer.cs">
+      <DependentUpon>ReportGroupSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\OptionPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\OptionPicker.Designer.cs">
+      <DependentUpon>OptionPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ReportStyleSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ReportStyleSettings.designer.cs">
+      <DependentUpon>ReportStyleSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsAssets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsAssets.designer.cs">
+      <DependentUpon>RptParamsAssets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsIncomeStatement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsIncomeStatement.designer.cs">
+      <DependentUpon>RptParamsIncomeStatement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsItems.designer.cs">
+      <DependentUpon>RptParamsItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsShareReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\RptParamsShareReport.designer.cs">
+      <DependentUpon>RptParamsShareReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\SelectItemsTraded.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\SelectItemsTraded.designer.cs">
+      <DependentUpon>SelectItemsTraded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\SettingsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\SettingsMenu.Designer.cs">
+      <DependentUpon>SettingsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\SplashScreen.designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\UpdatePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUIElements\UpdatePanel.Designer.cs">
+      <DependentUpon>UpdatePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\UpdateStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\UpdateStatus.Designer.cs">
+      <DependentUpon>UpdateStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewAssets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewAssets.designer.cs">
+      <DependentUpon>ViewAssets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewJournal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewJournal.designer.cs">
+      <DependentUpon>ViewJournal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewOrders.Designer.cs">
+      <DependentUpon>ViewOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewReport.designer.cs">
+      <DependentUpon>ViewReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIElements\ViewTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\ViewTransactions.designer.cs">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\AssetsReport.cs" />
+    <Compile Include="Reporting\BalanceSheet.cs" />
+    <Compile Include="Reporting\NAVReport.cs" />
+    <Compile Include="Reporting\IncomeStatement.cs" />
+    <Compile Include="Reporting\IReport.cs" />
+    <Compile Include="Reporting\IskAmount.cs" />
+    <Compile Include="GUIElements\EnterAccountDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\EnterAccountDetails.Designer.cs">
+      <DependentUpon>EnterAccountDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbstractionClasses\EveAPI.cs" />
+    <Compile Include="Common\Exceptions.cs" />
+    <Compile Include="GUIElements\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIElements\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Common\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\About.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\APIUpdateSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>APIUpdateSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\AutoAddConfig.resx">
+      <DependentUpon>AutoAddConfig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\AutoUpdateSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AutoUpdateSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ExportData.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExportData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\GridCalculator.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridCalculator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\GroupLocationList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GroupLocationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ItemValueDetail.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ItemValueDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ItemValueHistory.resx">
+      <DependentUpon>ItemValueHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintBankAccount.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaintBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintBankTrans.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaintBankTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\OrderNotificationSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OrderNotificationSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ReprocessHistory.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReprocessHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\Reprocessor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Reprocessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ReprocessSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReprocessSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RouteCalcSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RouteCalcSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RoutePlanner.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RoutePlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\Tutorial.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Tutorial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\TutorialIndex.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TutorialIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewItemDetail.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewItemDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewUnacknowledgedOrders.resx">
+      <DependentUpon>ViewUnacknowledgedOrders.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintShareValueHistory.resx">
+      <DependentUpon>MaintShareValueHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ListShareValueHistory.resx">
+      <DependentUpon>ListShareValueHistory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsNAVReport.resx">
+      <DependentUpon>RptParamsNAVReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\CourierSettings.resx">
+      <DependentUpon>CourierSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ListCorpWebLinks.resx">
+      <DependentUpon>ListCorpWebLinks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ListDividend.resx">
+      <DependentUpon>ListDividend.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ListShareTransactions.resx">
+      <DependentUpon>ListShareTransactions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintDividend.resx">
+      <DependentUpon>MaintDividend.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintPublicCorp.resx">
+      <DependentUpon>MaintPublicCorp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintShareTrans.resx">
+      <DependentUpon>MaintShareTrans.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\MaintWebLink.resx">
+      <DependentUpon>MaintWebLink.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewInvestments.resx">
+      <DependentUpon>ViewInvestments.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewContracts.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ControlPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\CourierCalc.resx">
+      <DependentUpon>CourierCalc.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\CreateReport.resx">
+      <DependentUpon>CreateReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\GroupLocationMaint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GroupLocationMaint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ImportData.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\Login.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ManageReportGroups.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ManageReportGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\NewRptGroup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewRptGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ReportGroupSetup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReportGroupSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\EnterAccountDetails.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EnterAccountDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\Main.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\OptionPicker.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OptionPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ReportStyleSettings.resx">
+      <DependentUpon>ReportStyleSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsAssets.resx">
+      <DependentUpon>RptParamsAssets.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsBase.resx">
+      <DependentUpon>RptParamsBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsIncomeStatement.resx">
+      <DependentUpon>RptParamsIncomeStatement.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsItems.resx">
+      <DependentUpon>RptParamsItems.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\RptParamsShareReport.resx">
+      <DependentUpon>RptParamsShareReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\SelectItemsTraded.resx">
+      <DependentUpon>SelectItemsTraded.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\SettingsMenu.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SettingsMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\UpdatePanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UpdatePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\UpdateStatus.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UpdateStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewAssets.resx">
+      <DependentUpon>ViewAssets.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewJournal.resx">
+      <DependentUpon>ViewJournal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewOrders.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewReport.resx">
+      <DependentUpon>ViewReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIElements\ViewTransactions.resx">
+      <DependentUpon>ViewTransactions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="DatabaseClasses\EMMADataSet.xsc">
+      <DependentUpon>EMMADataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DatabaseClasses\EMMADataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>EMMADataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DatabaseClasses\EMMADataSet.xss">
+      <DependentUpon>EMMADataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DatabaseClasses\EveDataSet.xsc">
+      <DependentUpon>EveDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DatabaseClasses\EveDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EveDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DatabaseClasses\EveDataSet.xss">
+      <DependentUpon>EveDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="EMMA.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reporting\ItemReport.cs" />
+    <Compile Include="Reporting\SharesReport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\EveData.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EveData_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>EveData.mdf</DependentUpon>
+    </Content>
+    <Content Include="Data\EMMA Database.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EMMA Database_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>EMMA Database.mdf</DependentUpon>
+    </Content>
+    <Content Include="Data\Tutorial_default.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Tutorial_en-GB.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon_coins_45.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.1.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
