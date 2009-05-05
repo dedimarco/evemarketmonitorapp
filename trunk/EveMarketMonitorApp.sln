@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveMarketMonitorApp", "EveMarketMonitorApp.csproj", "{B0843EAA-49A9-4746-B0A7-8958A7704ADF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4E83AF37-C0C5-4D55-AB7E-AA0D2AD924EC} = {4E83AF37-C0C5-4D55-AB7E-AA0D2AD924EC}
